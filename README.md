@@ -1,2 +1,2 @@
 # bv2av-lite
- bv2av项目的轻量版
+ bv2av的简化版
