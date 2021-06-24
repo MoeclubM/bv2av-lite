@@ -169,5 +169,5 @@ const exchange = () => {
 <div class = "goog">
     <br>
     <br>
-	<p>Built by <a href="https://github.com/2594418727/bv2av" target="_blank">YTC233</a></p>
+	<p><a href="https://github.com/2594418727/bv2av-lite" target="_blank">GitHub</a></p>
 </div>
