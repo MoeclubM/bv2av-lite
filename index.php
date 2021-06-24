@@ -1,13 +1,13 @@
 <html>
 <head>
-    <meta charset="utf-8" />
+	<title>BV号转AV号 - BV2AV</title>
+    <meta charset="utf-8"/>
     <meta name="keywords" content="bv号,av号,哔哩哔哩">
     <meta name="description" content="一个可以将BV号转AV号的小工具">
     <meta itemprop="name" content="BV号转AV号工具">
     <meta itemprop="description" content="BV号转AV号工具">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <meta name="referrer" content="no-referrer">
-    <title>BV号转AV号 - BV2AV</title>
+    
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/buttons.css" rel="stylesheet">
     <style>
@@ -21,7 +21,6 @@
             font-weight: 100;
             font-family: 'Lato';
         }
-        
         .container {
             text-align: center;
             display: block;
@@ -29,25 +28,20 @@
             top: 150px;
             vertical-align: middle;
         }
-        
         .content {
             text-align: center;
             display: inline-block;
         }
-        
         .title {
             font-size: 66px;
         }
-        
         .title small {
             font-size: 33px;
         }
-        
         .title a {
             color: #000;
             text-decoration: none;
         }
-        
         goo {
             display: block;
             position: fixed;
@@ -71,7 +65,7 @@
             <div class="for-group">
                 <div class="goo">
                     <form action="/index.php">
-                    <input type="text" id="x" name="BV" placeholder="请输入视频AV/BV号(记得带上英文哦，BV自动转换成AV，AV自动转换成BV)" value="<?php echo $_GET['BV'] ?>" class="form-control" style="text-align:center"/>
+                    <input type="text" id="x" name="BV" placeholder="请输入视频AV/BV号(可以自动互相转换)" value="<?php echo $_GET['BV'] ?>" class="form-control" style="text-align:center"/>
                     <br>
 					<br>
                     <button type="button" class = "button center button button-glow button-border button-rounded button-primary" onclick="return exchange() && false">转换</button>&nbsp;&nbsp;
@@ -154,8 +148,6 @@
 		};
 		return `av${result - add ^ xor}`;
 	};
-
-
 	const exchange = () => {
 		var x = document.getElementById('x').value;
 		if(x.substring(0,2).toLowerCase()=='bv'){
@@ -165,7 +157,6 @@
 		}
 	};
 	</script>
-
 	<div class = "goog">
 		<br>
 		<br>
