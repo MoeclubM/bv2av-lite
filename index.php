@@ -7,7 +7,7 @@
     <meta itemprop="description" content="BV号转AV号工具">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta name="referrer" content="no-referrer">
-    <title>BV号转AV号 - 获取视频的AV号</title>
+    <title>BV号转AV号 - BV2AV</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/buttons.css" rel="stylesheet">
     <style>
@@ -74,7 +74,7 @@
                     <input type="text" id="x" name="BV" placeholder="请输入视频AV/BV号(记得带上英文哦，BV自动转换成AV，AV自动转换成BV)" value="<?php echo $_GET['BV'] ?>" class="form-control" style="text-align:center"/>
                     <br>
 					<br>
-                    <button type="button" class = "button center button button-glow button-border button-rounded button-primary" onclick="return exchange() && false">点我转换</button>&nbsp;&nbsp;
+                    <button type="button" class = "button center button button-glow button-border button-rounded button-primary" onclick="return exchange() && false">转换</button>&nbsp;&nbsp;
                     </form>
                 </div>
             </div>
@@ -96,7 +96,7 @@
 				}elseif(strlen($str) == 10){
 					echo dec('BV'.$str);
 				}else{
-					echo "<font size='4' color='red'>".$str." 输入有误！请重新输入！</font>";
+					echo "<font size='4' color='red'>".$str." 输入有误！</font>";
 				}
 			}else{
 				echo dec($bv);
@@ -104,70 +104,71 @@
 		}
 		?>
 		</p>
-<script>
-'use strict';
-const table = [...'fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF'];
-const s = [11, 10, 3, 8, 4, 6];
-const xor = 177451812;
-const add = 8728348608;
-const av2bv = (av) => {
-    let num = NaN;
-    if (Object.prototype.toString.call(av) === '[object Number]') {
-        num = av;
-    } else if (Object.prototype.toString.call(av) === '[object String]') {
-        num = parseInt(av.replace(/[^0-9]/gu, ''));
-    };
-    if (isNaN(num) || num <= 0) {
-        return '输入有误！请重新输入！';
-    };
+	<script>
+	'use strict';
+	const table = [...'fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF'];
+	const s = [11, 10, 3, 8, 4, 6];
+	const xor = 177451812;
+	const add = 8728348608;
+	const av2bv = (av) => {
+		let num = NaN;
+		if (Object.prototype.toString.call(av) === '[object Number]') {
+			num = av;
+		} else if (Object.prototype.toString.call(av) === '[object String]') {
+			num = parseInt(av.replace(/[^0-9]/gu, ''));
+		};
+		if (isNaN(num) || num <= 0) {
+			return '输入有误！';
+		};
 
-    num = (num ^ xor) + add;
-    let result = [...'bv1  4 1 7  '];
-    let i = 0;
-    while (i < 6) {
-        result[s[i]] = table[Math.floor(num / 58 ** i) % 58];
-        i += 1;
-    };
-    return result.join('');
-};
+		num = (num ^ xor) + add;
+		let result = [...'bv1  4 1 7  '];
+		let i = 0;
+		while (i < 6) {
+			result[s[i]] = table[Math.floor(num / 58 ** i) % 58];
+			i += 1;
+		};
+		return result.join('');
+	};
 
-const bv2av = (bv) => {
-    let str = '';
-    if (bv.length === 12) {
-        str = bv;
-    } else if (bv.length === 10) {
-        str = `BV${bv}`;
-    } else if (bv.length === 9) {
-        str = `BV1${bv}`;
-    } else {
-        return '输入有误！请重新输入！';
-    };
-    if (!str.match(/[Bb][Vv][fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF]{10}/gu)) {
-        return '输入有误！请重新输入！';
-    };
+	const bv2av = (bv) => {
+		let str = '';
+		if (bv.length === 12) {
+			str = bv;
+		} else if (bv.length === 10) {
+			str = `BV${bv}`;
+		} else if (bv.length === 9) {
+			str = `BV1${bv}`;
+		} else {
+			return '输入有误！';
+		};
+		if (!str.match(/[Bb][Vv][fZodR9XQDSUm21yCkr6zBqiveYah8bt4xsWpHnJE7jL5VG3guMTKNPAwcF]{10}/gu)) {
+			return '输入有误！';
+		};
 
-    let result = 0;
-    let i = 0;
-    while (i < 6) {
-        result += table.indexOf(str[s[i]]) * 58 ** i;
-        i += 1;
-    };
-    return `av${result - add ^ xor}`;
-};
+		let result = 0;
+		let i = 0;
+		while (i < 6) {
+			result += table.indexOf(str[s[i]]) * 58 ** i;
+			i += 1;
+		};
+		return `av${result - add ^ xor}`;
+	};
 
 
-const exchange = () => {
-	var x = document.getElementById('x').value;
-	if(x.substring(0,2).toLowerCase()=='bv'){
-        document.getElementById('x').value = `${bv2av(x)}`;
-	}else if(x.substring(0,2).toLowerCase()=='av'){
-        document.getElementById('x').value = `${av2bv(x)}`;
-	}
-};
-</script>
+	const exchange = () => {
+		var x = document.getElementById('x').value;
+		if(x.substring(0,2).toLowerCase()=='bv'){
+			document.getElementById('x').value = `${bv2av(x)}`;
+		}else if(x.substring(0,2).toLowerCase()=='av'){
+			document.getElementById('x').value = `${av2bv(x)}`;
+		}
+	};
+	</script>
+
+	<div class = "goog">
+		<br>
+		<br>
+		<a href="https://github.com/2594418727/bv2av-lite" target="_blank">GitHub</a>
+	</div>
 </body>
-<div class = "goog">
-    <br>
-    <br>
-	<p><a href="https://github.com/2594418727/bv2av-lite" target="_blank">GitHub</a></p>
-</div>
